@@ -1,29 +1,68 @@
-import React from 'react';
-import Hello from './hello';
-import Wrapper from './Wrapper'
-import './App.css';
-import Counter from './Couter';
+import React, { useState, useRef } from 'react';
+import UserList from './UserList';
+import CreateUser from './CreateUser';
 
 function App() {
-  return (
-    <Counter/>
+  const [inputs, setInputs ] = useState({
+    username: '',
+    email: ''
+  });
+
+  const { username, email } = inputs;
+
+  const onChange = e => {
+    const { name, value } = e.target;
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
+  };
+
+  const [users, setUsers] = useState([
+    {
+      id: 1,
+      username: 'velopert',
+      email: 'public.velopert@gmail.com'
+    },
+    {
+      id: 2,
+      username: 'tester',
+      email: 'tester@example.com'
+    },
+    {
+      id: 3,
+      username: 'liz',
+      email: 'liz@example.com'
+    }
+  ]);
+
+  const nextId = useRef(4);
+
+  const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      username,
+      email
+    };
+    setUsers(users.concat(user));
+    setInputs({
+      username:'',
+      email: ''
+    });
+    nextId.current += 1;
+  }
+
+  return(
+    <>
+      <CreateUser 
+          username={username} 
+          email={email} 
+          onCreate={onCreate}
+          onChange={onChange}
+      />
+      <UserList users={users} />
+    </>
+    
   )
 }
-
-function App1() {
-  const name = 'react'
-  const style = {
-    backgroundColor: 'black',
-    color: 'aqua',
-    fontSize: 24,
-    padding: '1rem'
-  };
-  return (
-      <Wrapper>
-        <Hello name={name} color="orange" isSpecial/>
-        <div style={style}>{name}</div>
-      </Wrapper>
-  );
-}
-
 export default App;
