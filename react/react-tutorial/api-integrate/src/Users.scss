@@ -1,0 +1,7 @@
+.li {
+  cursor: pointer;
+  width: fit-content;
+  &:hover {
+    background: gray;
+  }
+}
