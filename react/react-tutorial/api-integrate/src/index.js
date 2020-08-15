@@ -3,15 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import ContextSample from './components/ContextSample';
-import Hello from './components/hello';
-import Counter from './components/Counter';
-import Button from './components/Button';
-import App2 from './App2';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App2/>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
